@@ -145,8 +145,11 @@ class DBLogManager(models.Manager):
         frames = reporter.get_traceback_frames()
 
         data = kwargs.pop('data', {}) or {}
-        data['exc'] = base64.b64encode(pickle.dumps(map(to_unicode, [exc_type.__class__.__module__, exc_value.args, frames])).encode('zlib'))
-
+        try:
+            data['exc'] = base64.b64encode(pickle.dumps(map(to_unicode, [exc_type.__class__.__module__, exc_value.args, frames])).encode('zlib'))
+        except:
+            data['exc'] = base64.b64encode(pickle.dumps(map(to_unicode, [exc_type.__class__.__module__, exc_value.args, []])).encode('zlib'))
+        
         tb_message = '\n'.join(traceback_mod.format_exception(exc_type, exc_value, traceback))
 
         kwargs.setdefault('message', to_unicode(exc_value))

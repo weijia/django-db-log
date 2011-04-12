@@ -121,7 +121,7 @@ class ErrorAdminForm(forms.ModelForm):
     
     class Meta:
         fields = ('url', 'logger', 'server_name', 'class_name', 'level', 'message', 'datetime', 'traceback')
-        model = ErrorBatch
+        model = Error
 
 # Actual admin modules
 

@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.contrib.admin.filterspecs import AllValuesFilterSpec, FilterSpec
 from django.contrib.admin.util import unquote
-from django.contrib.admin.views.main import ChangeList, Paginator
+from django.contrib.admin.views.main import ChangeList
 from django.core.cache import cache
+from django.core.paginator import Paginator
 from django.utils.encoding import force_unicode, smart_unicode
 from django.utils.html import escape
 from django.utils.safestring import mark_safe

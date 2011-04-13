@@ -54,8 +54,8 @@ class EfficientModelAdmin(admin.ModelAdmin):
         return EfficientChangeList
 
 class EfficientAllValuesFilterSpec(AllValuesFilterSpec):
-    def __init__(self, f, request, params, model, model_admin):
-        super(AllValuesFilterSpec, self).__init__(f, request, params, model, model_admin)
+    def __init__(self, f, request, params, model, model_admin, field_path=None):
+        super(AllValuesFilterSpec, self).__init__(f, request, params, model, model_admin, field_path=field_path)
         self.lookup_val = request.GET.get(f.name, None)
         qs = model_admin.queryset(request).order_by(f.name)
         # self.lookup_choices = list(qs.values_list(f.name, flat=True).distinct())

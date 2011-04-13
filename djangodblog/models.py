@@ -66,7 +66,9 @@ class ErrorBase(Model):
     shortened_url.admin_order_field = 'url'
     
     def full_url(self):
-        return self.data.get('url') or self.url
+        if hasattr(self, 'data'):
+            return self.data.get('url') or self.url
+        return self.url
     full_url.short_description = _('url')
     full_url.admin_order_field = 'url'
     

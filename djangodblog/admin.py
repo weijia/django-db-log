@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.contrib.admin.filterspecs import AllValuesFilterSpec, FilterSpec
+#from django.contrib.admin.filterspecs import AllValuesFilterSpec, FilterSpec
 from django.contrib.admin.util import unquote
 from django.contrib.admin.views.main import ChangeList
 from django.core.paginator import Paginator
@@ -53,9 +53,9 @@ class EfficientModelAdmin(admin.ModelAdmin):
     def get_changelist(self, request, **kwargs):
         return EfficientChangeList
 
-class EfficientAllValuesFilterSpec(AllValuesFilterSpec):
+class EfficientAllValuesFilterSpec(object):#AllValuesFilterSpec):
     def __init__(self, f, request, params, model, model_admin, field_path=None):
-        super(AllValuesFilterSpec, self).__init__(f, request, params, model, model_admin, field_path=field_path)
+        #super(AllValuesFilterSpec, self).__init__(f, request, params, model, model_admin, field_path=field_path)
         self.lookup_val = request.GET.get(f.name, None)
         qs = model_admin.queryset(request).order_by(f.name)
         # self.lookup_choices = list(qs.values_list(f.name, flat=True).distinct())
@@ -76,7 +76,7 @@ class EfficientAllValuesFilterSpec(AllValuesFilterSpec):
             yield {'selected': self.lookup_val == val,
                    'query_string': cl.get_query_string({self.field.name: val}),
                    'display': val}
-FilterSpec.filter_specs.insert(-1, (lambda f: hasattr(f, 'model') and f.model._meta.app_label == 'djangodblog', EfficientAllValuesFilterSpec))
+#FilterSpec.filter_specs.insert(-1, (lambda f: hasattr(f, 'model') and f.model._meta.app_label == 'djangodblog', EfficientAllValuesFilterSpec))
 
 UNDEFINED = object()
 

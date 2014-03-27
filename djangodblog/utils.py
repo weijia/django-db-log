@@ -53,7 +53,7 @@ class JSONDictField(models.TextField):
             return {}
         return value
  
-    def get_db_prep_save(self, value):
+    def get_db_prep_save(self, value, connection):
         if value is None: return
         return json_dumps(value)
  

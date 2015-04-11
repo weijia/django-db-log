@@ -1,6 +1,13 @@
 from django.conf import settings
 from django.conf.urls.defaults import *
-from django.utils.hashcompat import md5_constructor
+# from django.utils.hashcompat import md5_constructor
+from django.conf.urls import patterns, url
+try:
+    import hashlib
+    md5_constructor = hashlib.md5
+except ImportError:
+    import md5
+    md5_constructor = md5.new
 
 from feeds import ErrorFeed, SummaryFeed
 
